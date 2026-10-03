@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/jacobhuemmer/jkins/internal/cli"
+	"github.com/masonhuemmer/jkins/internal/cli"
 	"golang.org/x/term"
 )
 

@@ -5,7 +5,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/jacobhuemmer/jkins/internal/jenkins"
+	"github.com/masonhuemmer/jkins/internal/jenkins"
 )
 
 func runBuild(args []string, human bool, deps Deps) int {

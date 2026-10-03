@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/jacobhuemmer/jkins/internal/vault"
+	"github.com/masonhuemmer/jkins/internal/vault"
 )
 
 func runAuth(command string, human bool, store vault.Store, deps Deps) int {

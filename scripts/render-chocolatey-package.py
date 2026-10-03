@@ -25,7 +25,7 @@ def main() -> None:
 
     amd_name, amd_sha = archive("amd64")
     arm_name, arm_sha = archive("arm64")
-    base = f"https://github.com/jacobhuemmer/jkins/releases/download/v{version}"
+    base = f"https://github.com/masonhuemmer/jkins/releases/download/v{version}"
     package_dir = dist / "chocolatey"
     tools_dir = package_dir / "tools"
     tools_dir.mkdir(parents=True, exist_ok=True)
@@ -39,14 +39,14 @@ def main() -> None:
                 <version>{version}</version>
                 <title>jkins</title>
                 <authors>Jacob Huemmer</authors>
-                <owners>jacobhuemmer</owners>
-                <projectUrl>https://github.com/jacobhuemmer/jkins</projectUrl>
-                <packageSourceUrl>https://github.com/jacobhuemmer/jkins/blob/main/scripts/render-chocolatey-package.py</packageSourceUrl>
-                <licenseUrl>https://github.com/jacobhuemmer/jkins/blob/main/LICENSE</licenseUrl>
+                <owners>masonhuemmer</owners>
+                <projectUrl>https://github.com/masonhuemmer/jkins</projectUrl>
+                <packageSourceUrl>https://github.com/masonhuemmer/jkins/blob/main/scripts/render-chocolatey-package.py</packageSourceUrl>
+                <licenseUrl>https://github.com/masonhuemmer/jkins/blob/main/LICENSE</licenseUrl>
                 <requireLicenseAcceptance>false</requireLicenseAcceptance>
                 <summary>Native Go Jenkins CLI with an encrypted local vault</summary>
                 <description>jkins runs Jenkins CLI commands directly over the WebSocket protocol and stores API credentials in an encrypted local vault.</description>
-                <releaseNotes>https://github.com/jacobhuemmer/jkins/releases/tag/v{version}</releaseNotes>
+                <releaseNotes>https://github.com/masonhuemmer/jkins/releases/tag/v{version}</releaseNotes>
                 <copyright>Copyright (c) 2026 Jacob Huemmer</copyright>
                 <tags>jenkins cli ci cd</tags>
               </metadata>

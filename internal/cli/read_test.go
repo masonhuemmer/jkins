@@ -17,8 +17,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/jacobhuemmer/jkins/internal/cli"
-	"github.com/jacobhuemmer/jkins/internal/vault"
+	"github.com/masonhuemmer/jkins/internal/cli"
+	"github.com/masonhuemmer/jkins/internal/vault"
 )
 
 func readDeps(t *testing.T, url string) cli.Deps {

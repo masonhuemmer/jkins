@@ -17,8 +17,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/jacobhuemmer/jkins/internal/config"
-	"github.com/jacobhuemmer/jkins/internal/vault"
+	"github.com/masonhuemmer/jkins/internal/config"
+	"github.com/masonhuemmer/jkins/internal/vault"
 )
 
 const metadataLimit = 8 << 20
