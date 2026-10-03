@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jacobhuemmer/jkins/internal/cli"
+	"github.com/masonhuemmer/jkins/internal/cli"
 )
 
 type fakeTerminal struct {

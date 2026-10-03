@@ -14,7 +14,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
-	"github.com/jacobhuemmer/jkins/internal/cli"
+	"github.com/masonhuemmer/jkins/internal/cli"
 )
 
 func TestNativeCLIUsesVaultAndWebSocketProtocol(t *testing.T) {

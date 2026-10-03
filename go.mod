@@ -1,4 +1,4 @@
-module github.com/jacobhuemmer/jkins
+module github.com/masonhuemmer/jkins
 
 go 1.26.0
 

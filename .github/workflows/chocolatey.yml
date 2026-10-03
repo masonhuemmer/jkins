@@ -39,7 +39,7 @@ jobs:
           $tag = if ($env:GITHUB_EVENT_NAME -ne 'pull_request') {
             $env:INPUT_TAG
           } else {
-            gh release view --repo jacobhuemmer/jkins --json tagName --jq .tagName
+            gh release view --repo masonhuemmer/jkins --json tagName --jq .tagName
           }
           if ($tag -notmatch '^v\d+\.\d+\.\d+$') { throw "Expected a vMAJOR.MINOR.PATCH release tag" }
           "RELEASE_TAG=$tag" >> $env:GITHUB_ENV
@@ -47,7 +47,7 @@ jobs:
       - name: Download published Windows archives
         shell: pwsh
         run: |
-          gh release download $env:RELEASE_TAG --repo jacobhuemmer/jkins --pattern 'jkins_*_windows_*.zip' --dir dist
+          gh release download $env:RELEASE_TAG --repo masonhuemmer/jkins --pattern 'jkins_*_windows_*.zip' --dir dist
       - name: Render and pack Chocolatey package
         shell: pwsh
         run: |
@@ -66,7 +66,7 @@ jobs:
         if: github.event_name != 'pull_request'
         shell: pwsh
         run: |
-          gh release upload $env:RELEASE_TAG "dist/jkins.$env:RELEASE_VERSION.nupkg" --repo jacobhuemmer/jkins --clobber
+          gh release upload $env:RELEASE_TAG "dist/jkins.$env:RELEASE_VERSION.nupkg" --repo masonhuemmer/jkins --clobber
       - uses: actions/upload-artifact@v4
         with:
           name: chocolatey-package

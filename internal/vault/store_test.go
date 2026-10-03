@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"filippo.io/age"
-	"github.com/jacobhuemmer/jkins/internal/vault"
+	"github.com/masonhuemmer/jkins/internal/vault"
 )
 
 func TestCredentialRoundTripIsPrivate(t *testing.T) {

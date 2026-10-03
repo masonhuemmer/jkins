@@ -23,12 +23,12 @@ def main() -> None:
     mac_amd, mac_amd_sha = archive("darwin", "amd64")
     linux_arm, linux_arm_sha = archive("linux", "arm64")
     linux_amd, linux_amd_sha = archive("linux", "amd64")
-    base = f"https://github.com/jacobhuemmer/jkins/releases/download/v{version}"
+    base = f"https://github.com/masonhuemmer/jkins/releases/download/v{version}"
     formula = textwrap.dedent(
         f'''\
         class Jkins < Formula
           desc "Native Go Jenkins CLI with an encrypted local vault"
-          homepage "https://github.com/jacobhuemmer/jkins"
+          homepage "https://github.com/masonhuemmer/jkins"
           version "{version}"
           license "MIT"
 

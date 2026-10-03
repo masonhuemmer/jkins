@@ -2,7 +2,7 @@ package cli
 
 import (
 	"fmt"
-	"github.com/jacobhuemmer/jkins/internal/jenkins"
+	"github.com/masonhuemmer/jkins/internal/jenkins"
 	"strings"
 )
 

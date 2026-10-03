@@ -10,7 +10,7 @@ import (
 	"strings"
 	"testing"
 
-	"github.com/jacobhuemmer/jkins/internal/cli"
+	"github.com/masonhuemmer/jkins/internal/cli"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 

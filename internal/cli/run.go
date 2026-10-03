@@ -6,9 +6,9 @@ import (
 	"io"
 	"strings"
 
-	"github.com/jacobhuemmer/jkins/internal/config"
-	"github.com/jacobhuemmer/jkins/internal/jenkins"
-	"github.com/jacobhuemmer/jkins/internal/vault"
+	"github.com/masonhuemmer/jkins/internal/config"
+	"github.com/masonhuemmer/jkins/internal/jenkins"
+	"github.com/masonhuemmer/jkins/internal/vault"
 )
 
 type Terminal interface {
