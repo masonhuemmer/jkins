@@ -16,6 +16,6 @@ jkins build queue Team/Job --param VERSION=1.2 --execute
 
 The first command is a local preview and needs no credential. `--execute` queues one build. Parameters are sent in the POST form body. If submission fails ambiguously, inspect the Jenkins queue or job state before retrying; another submission could queue a duplicate.
 
-Direct Jenkins CLI syntax is different: `jkins build Team/Job` queues immediately. Read `jkins help build` for the controller's current options. Use `jkins build Team/Job -f -v` when the user wants to follow the run and see output; `-f` lets the build keep running if the local follow is interrupted. Do not substitute the direct command for a preview.
+Direct `jkins` build syntax is different: `jkins build Team/Job` queues immediately. Read `jkins help build` for the controller's current options. Use `jkins build Team/Job -f -v` when the user wants to follow the run and see output; `-f` lets the build keep running if the local follow is interrupted. Do not substitute the direct command for a preview.
 
 If using MCP, `jkins_build_queue` takes `job_path` and optional `parameters`. It previews by default; `write_opt_in: true` queues the build. MCP cannot follow a build. Read a specific build with `jkins build get PATH NUMBER` or `jkins build log PATH NUMBER` after identifying its number.

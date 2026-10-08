@@ -15,4 +15,4 @@ For a private certificate authority, add `"ca_file":"/absolute/path/to/ca.pem"` 
 
 Run `jkins auth status` to see whether a local credential is stored. A user can run `jkins auth login` in a real terminal to enter a Jenkins username and API token without echoing the token. `auth status` reports only presence and username, not whether the controller accepts the token. `jkins auth logout` removes the stored credential. Keep tokens out of command arguments, config files, and shared output.
 
-Once configured and authenticated, `jkins who-am-i` tests the controller identity through the native Jenkins CLI. If the controller's current command list is needed, use `jkins commands`. For platform-specific install and state paths, see the repository's `README.md`.
+Once configured and authenticated, `jkins who-am-i` tests the controller identity through its WebSocket command path. If the controller's current command list is needed, use `jkins commands`. For platform-specific install and state paths, see the repository's `README.md`.

@@ -13,7 +13,7 @@ jkins help COMMAND
 jkins COMMAND [arguments]
 ```
 
-For a command name that overlaps a local `jkins` command, use `jkins --jenkins-command COMMAND [arguments]`. For example, `jkins --jenkins-command help` sends `help` to Jenkins. Native commands preserve stdin, stdout, stderr, and Jenkins exit codes. They use Jenkins CLI semantics, including immediate execution for `jkins build JOB`.
+For a command name that overlaps a local `jkins` command, use `jkins --jenkins-command COMMAND [arguments]`. For example, `jkins --jenkins-command help` sends `help` to Jenkins. Native commands preserve stdin, stdout, stderr, and Jenkins exit codes. They use the controller's CLI semantics, including immediate execution for `jkins build JOB`.
 
 Use a command that changes Jenkins only when the user's request authorizes that action. For a build or deployment, identify the exact job and deployment target; `jkins build queue JOB` can preview before `--execute`, while direct `jkins build JOB` runs immediately. Before other writes, inspect the controller's `help COMMAND`, identify the exact objects affected, and report the result from that invocation. A failed or interrupted command may already have changed server state; check before retrying.
 
