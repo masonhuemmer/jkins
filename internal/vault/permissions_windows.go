@@ -10,12 +10,13 @@ import (
 
 func protectExisting(s Store) error {
 	for _, path := range []string{s.Dir, filepath.Join(s.Dir, "keys"), s.vaultPath(), s.identityPath()} {
-		if _, err := os.Lstat(path); os.IsNotExist(err) {
+		info, err := os.Lstat(path)
+		if os.IsNotExist(err) {
 			continue
 		} else if err != nil {
 			return err
 		}
-		if err := restrictAccess(path, false); err != nil {
+		if err := restrictAccess(path, info.IsDir()); err != nil {
 			return err
 		}
 	}
