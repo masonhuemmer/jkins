@@ -10,6 +10,7 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+	"sync"
 
 	"filippo.io/age"
 )
@@ -20,6 +21,8 @@ type Credential struct {
 }
 
 type Store struct{ Dir string }
+
+var vaultMu sync.Mutex
 
 type envelope struct {
 	Version int    `json:"version"`
@@ -34,7 +37,16 @@ func (s Store) vaultPath() string    { return filepath.Join(s.Dir, "vault.json")
 func (s Store) identityPath() string { return filepath.Join(s.Dir, "keys", "identity.txt") }
 
 func (s Store) Load() (Credential, bool, error) {
+	vaultMu.Lock()
+	defer vaultMu.Unlock()
+	return s.load()
+}
+
+func (s Store) load() (Credential, bool, error) {
 	var zero Credential
+	if err := protectExisting(s); err != nil {
+		return zero, false, err
+	}
 	data, err := os.ReadFile(s.vaultPath())
 	if errors.Is(err, os.ErrNotExist) {
 		return zero, false, nil
@@ -79,14 +91,18 @@ func (s Store) Save(credential Credential) error {
 	if credential.User == "" || credential.Token == "" {
 		return errors.New("user and token are required")
 	}
-	if _, _, err := s.Load(); err != nil {
+	vaultMu.Lock()
+	defer vaultMu.Unlock()
+	if _, _, err := s.load(); err != nil {
 		return err
 	}
 	return s.write(contents{Credential: &credential})
 }
 
 func (s Store) Delete() error {
-	_, present, err := s.Load()
+	vaultMu.Lock()
+	defer vaultMu.Unlock()
+	_, present, err := s.load()
 	if err != nil {
 		return err
 	}
@@ -145,7 +161,7 @@ func (s Store) createIdentity() (*age.X25519Identity, error) {
 	}
 	defer os.Remove(file.Name())
 	defer file.Close()
-	if err := file.Chmod(0600); err != nil {
+	if err := privateFile(file); err != nil {
 		return nil, err
 	}
 	if _, err := file.WriteString(identity.String() + "\n"); err != nil {
@@ -178,13 +194,6 @@ func (s Store) readIdentity() (*age.X25519Identity, error) {
 	return identity, nil
 }
 
-func privateDir(path string) error {
-	if err := os.MkdirAll(path, 0700); err != nil {
-		return err
-	}
-	return os.Chmod(path, 0700)
-}
-
 func atomicWrite(path string, data []byte) (err error) {
 	file, err := os.CreateTemp(filepath.Dir(path), ".jkins-*")
 	if err != nil {
@@ -192,7 +201,7 @@ func atomicWrite(path string, data []byte) (err error) {
 	}
 	defer os.Remove(file.Name())
 	defer file.Close()
-	if err := file.Chmod(0600); err != nil {
+	if err := privateFile(file); err != nil {
 		return err
 	}
 	if _, err := file.Write(data); err != nil {
