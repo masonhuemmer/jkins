@@ -23,13 +23,7 @@ func TestCredentialRoundTripIsPrivate(t *testing.T) {
 		t.Fatalf("Load() = %+v, %v, %v", got, present, err)
 	}
 	for _, path := range []string{dir, filepath.Join(dir, "keys")} {
-		info, err := os.Stat(path)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if info.Mode().Perm() != 0700 {
-			t.Errorf("%s mode = %o", path, info.Mode().Perm())
-		}
+		assertPrivatePath(t, path, true)
 	}
 	for _, path := range []string{filepath.Join(dir, "vault.json"), filepath.Join(dir, "keys", "identity.txt")} {
 		data, err := os.ReadFile(path)
@@ -39,13 +33,7 @@ func TestCredentialRoundTripIsPrivate(t *testing.T) {
 		if bytes.Contains(data, []byte(want.User)) || bytes.Contains(data, []byte(want.Token)) {
 			t.Errorf("%s contains credential plaintext", path)
 		}
-		info, err := os.Stat(path)
-		if err != nil {
-			t.Fatal(err)
-		}
-		if info.Mode().Perm() != 0600 {
-			t.Errorf("%s mode = %o", path, info.Mode().Perm())
-		}
+		assertPrivatePath(t, path, false)
 	}
 	if err := store.Delete(); err != nil {
 		t.Fatal(err)
